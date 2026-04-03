@@ -51,9 +51,8 @@ public:
     void UpdateLastVertex(const QPointF& new_vertex);
     std::optional<QPointF> IntersectRay(const Ray& ray) const;
 
-    // Новыя метады для вырашэння праблем
-    bool ContainsPoint(const QPointF& pt) const; // Ці знаходзіцца кропка ўнутры
-    void MakeClockwise(); // Выпраўленне малявання супраць гадзіннікавай
+    bool ContainsPoint(const QPointF& pt) const;
+    void MakeClockwise();
 
 private:
     std::vector<QPointF> m_vertices;
@@ -66,9 +65,8 @@ public:
     void AddPolygon(const Polygon& p);
     void AddVertexToLastPolygon(const QPointF& new_vertex);
     void UpdateLastPolygon(const QPointF& new_vertex);
-    void FinalizeLastPolygon(); // Выклікаецца пры завяршэнні малявання
+    void FinalizeLastPolygon();
 
-    // Кіраванне ліхтарамі
     const std::vector<Light>& GetLights() const;
     void AddLight(const QPointF& pos, const QColor& color = Qt::white);
     void RemoveLight(size_t index);

@@ -11,7 +11,6 @@ Canvas::Canvas(QWidget *parent)
 {
     setMouseTracking(true); 
     
-    // Межы свету
     Polygon bounds;
     bounds.AddVertex(QPointF(0, 0));
     bounds.AddVertex(QPointF(3000, 0));
@@ -61,7 +60,6 @@ void Canvas::mousePressEvent(QMouseEvent *event) {
                 QAction* changeCol = menu.addAction("Змяніць колер");
                 QAction* deleteLt = menu.addAction("Выдаліць");
                 
-                // Выкарыстоўваем globalPosition() замест globalPos() для Qt6
                 QAction* selected = menu.exec(event->globalPosition().toPoint());
                 
                 if (selected == changeCol) {
@@ -120,11 +118,9 @@ void Canvas::paintEvent(QPaintEvent *) {
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
 
-    // 1. БАЗАВЫ КОЛЕР ПАЛАТНА
     QColor paperColor(245, 240, 225); 
     painter.fillRect(rect(), paperColor);
 
-    // 2. СЛОЙ ЦЕМРЫ (Shadow Mapping)
     QImage shadowMap(size(), QImage::Format_ARGB32_Premultiplied);
     shadowMap.fill(Qt::transparent);
     QPainter sPainter(&shadowMap);

@@ -60,7 +60,6 @@ std::optional<QPointF> Polygon::IntersectRay(const Ray& ray) const {
     return closest_intersection;
 }
 
-// Ray-casting алгарытм для праверкі кропкі ўнутры
 bool Polygon::ContainsPoint(const QPointF& pt) const {
     if (m_vertices.size() < 3) return false;
     bool inside = false;
@@ -75,7 +74,6 @@ bool Polygon::ContainsPoint(const QPointF& pt) const {
     return inside;
 }
 
-// Выпраўленне крывых шматкутнікаў
 void Polygon::MakeClockwise() {
     if (m_vertices.size() < 3) return;
     double sum = 0;
@@ -84,7 +82,7 @@ void Polygon::MakeClockwise() {
         QPointF p2 = m_vertices[(i + 1) % m_vertices.size()];
         sum += (p2.x() - p1.x()) * (p2.y() + p1.y());
     }
-    if (sum > 0) { // Qt вокны маюць перавернутую вось Y, таму > 0 - гэта супраць гадзіннікавай
+    if (sum > 0) {
         std::reverse(m_vertices.begin(), m_vertices.end());
     }
 }
@@ -103,7 +101,6 @@ void Controller::FinalizeLastPolygon() {
     if (m_polygons.size() > 1) {
         m_polygons.back().MakeClockwise();
         
-        // Калі мы намалявалі шматкутнік па-над ліхтаром - выдаляем гэты ліхтар
         auto it = m_lights.begin();
         while (it != m_lights.end()) {
             if (m_polygons.back().ContainsPoint(it->pos)) {
@@ -128,7 +125,6 @@ void Controller::SetLightColor(size_t index, const QColor& color) {
 }
 
 bool Controller::IsPointInAnyPolygon(const QPointF& pt) const {
-    // Пачынаем з 1, бо 0 - гэта рамка экрана
     for (size_t i = 1; i < m_polygons.size(); ++i) {
         if (m_polygons[i].ContainsPoint(pt)) return true;
     }

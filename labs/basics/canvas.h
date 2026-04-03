@@ -20,7 +20,7 @@ private:
     Controller m_controller;
     Mode m_mode;
     bool m_drawing_polygon;
-    int m_dragged_light_idx; // Індэкс ліхтара, які зараз "прылеплены" да курсора
+    int m_dragged_light_idx;
     
     QPolygonF convertToQPolygonF(const Polygon& poly) const;
 };

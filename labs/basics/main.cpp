@@ -8,11 +8,10 @@
 class MainWindow : public QMainWindow {
 public:
     MainWindow(QWidget *parent = nullptr) : QMainWindow(parent) {
-        // Галоўны віджэт і слой
+        
         auto *centralWidget = new QWidget(this);
         auto *layout = new QVBoxLayout(centralWidget);
 
-        // Панель кіравання (выбар рэжыму)
         auto *controls = new QHBoxLayout();
         auto *label = new QLabel("Рэжым:", this);
         auto *modeSelector = new QComboBox(this);
@@ -25,11 +24,9 @@ public:
         
         layout->addLayout(controls);
 
-        // Палатна для рэйкастынгу
         auto *canvas = new Canvas(this);
         layout->addWidget(canvas, 1);
 
-        // Злучаем выбар рэжыму з палатном
         connect(modeSelector, QOverload<int>::of(&QComboBox::currentIndexChanged),
                 [canvas](int index){
                     canvas->setMode(index == 0 ? Canvas::LIGHT_MODE : Canvas::POLYGON_MODE);
