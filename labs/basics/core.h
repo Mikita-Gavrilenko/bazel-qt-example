@@ -18,7 +18,6 @@ inline double Distance(const QPointF& p1, const QPointF& p2) {
     return std::hypot(p1.x() - p2.x(), p1.y() - p2.y());
 }
 
-// Структура для захоўвання ліхтароў
 struct Light {
     QPointF pos;
     QColor color = Qt::white;

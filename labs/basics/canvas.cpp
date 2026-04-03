@@ -154,7 +154,6 @@ void Canvas::paintEvent(QPaintEvent *) {
 
     painter.drawImage(0, 0, shadowMap);
 
-    // 3. ФІГУРЫ
     const auto& polys = m_controller.GetPolygons();
     for (size_t i = 1; i < polys.size(); ++i) {
         if (i == polys.size() - 1 && m_drawing_polygon) {
@@ -167,7 +166,6 @@ void Canvas::paintEvent(QPaintEvent *) {
         painter.drawPolygon(convertToQPolygonF(polys[i]));
     }
 
-    // 4. ЛІХТАРЫ
     for (size_t i = 0; i < lights.size(); ++i) {
         bool isDragged = (static_cast<int>(i) == m_dragged_light_idx);
         painter.setPen(QPen(isDragged ? Qt::red : Qt::black, 1));
